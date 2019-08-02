@@ -47,6 +47,8 @@ else:
     object_service_prefix = "object service " + prefix
     object_group_prefix = "object-group " + prefix
     object_prefix = "object " + prefix
+    source_static_prefix = " source static " + prefix
+    source_dynamic_prefix = " source dynamic " + prefix
 
 ###
 # Replace all object/object-group references, including nested
@@ -89,6 +91,18 @@ else:
                 print(new_line)
             else:
                 print(line)
+###
+# Iterate through twice-nat commands
+###
+        elif re.search('nat ', line):
+            split_line = line.split(" ")
+            split_line[4] = prefix + split_line[4]
+            split_line[5] = prefix + split_line[5]
+            split_line[8] = prefix + split_line[8]
+            split_line[9] = prefix + split_line[9]
+            new_line = ' '.join(split_line)
+            print(new_line)
         else:
             print(line)
+
 
